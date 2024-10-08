@@ -32,14 +32,20 @@ const ImageForm = () => {
 
   //save image
   const saveImage = async () => {
+    console.log("save image started");
     if (!imageSrc) return;
+    console.log("confirmed image source");
 
     setIsSaving(true);
     try {
-      const response = await axios.post(`${api}/upload`, {
-        userId: "user123", // Replace with actual logged-in user ID
+      console.log("trying!");
+      const response = await axios.post(`${api}/save-image`, {
+        userId: 8, // Replace with actual logged-in user ID
         image: imageSrc,
+        public: false,
       });
+
+      console.log("stored :)", response);
 
       alert("Image saved successfully!");
     } catch (error) {
@@ -63,7 +69,7 @@ const ImageForm = () => {
         <div>
           <img src={imageSrc} alt="Generated" style={{ width: "300px" }} />
           <button onClick={downloadImage}>Download Image</button>
-          <button onCick={saveImage} disabled={isSaving}>
+          <button onClick={saveImage} disabled={isSaving}>
             {isSaving ? "Saving..." : "Save Image"}
           </button>
         </div>

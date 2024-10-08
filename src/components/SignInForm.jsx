@@ -13,7 +13,7 @@ const SignInForm = () => {
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3500/login", {
+      const response = await axios.post("http://localhost:3500/signin", {
         email,
         password,
       });
