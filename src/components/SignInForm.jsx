@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const onPasswordChange = (e) => setPassword(e.target.value);
   const onEmailChange = (e) => setEmail(e.target.value);
@@ -19,7 +23,8 @@ const SignInForm = () => {
       });
 
       if (response.data) {
-        console.log("Login successful");
+        setUser(response.data);
+        navigate("/");
       } else {
         setErrorMessage("Login failed.");
       }
