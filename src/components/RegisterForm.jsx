@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
+import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const { user, setUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -18,7 +23,9 @@ const RegisterForm = () => {
       });
 
       if (response.data) {
-        console.log("Registration successful");
+        setUser(response.data);
+        console.log(user);
+        navigate("/");
       } else {
         setErrorMessage("Registration failed.");
       }

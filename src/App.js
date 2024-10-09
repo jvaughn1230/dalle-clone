@@ -1,11 +1,21 @@
+import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Register from "./routes/Register";
+import Home from "./routes/Home";
+import SignIn from "./routes/SignIn";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
+
 import "./App.css";
-import ImageForm from "./components/ImageForm";
 
 function App() {
   return (
-    <div className="App">
-      <ImageForm />
-    </div>
+    <Routes>
+      <Route element={<SignIn />} path="/signin" />
+      <Route element={<Register />} path="/register" />
+      <Route element={<ProtectedRoutes />}>
+        <Route element={<Home />} path="/" />
+      </Route>
+    </Routes>
   );
 }
 
