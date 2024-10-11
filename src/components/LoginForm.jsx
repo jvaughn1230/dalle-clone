@@ -4,20 +4,22 @@ import axios from "axios";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-const SignInForm = () => {
+const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  const inputStyles = "border-b-2 border-solid border-blue m-2 outline-none";
+
   const onPasswordChange = (e) => setPassword(e.target.value);
   const onEmailChange = (e) => setEmail(e.target.value);
 
-  const handleSignin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3500/signin", {
+      const response = await axios.post("http://localhost:3500/login", {
         email,
         password,
       });
@@ -35,7 +37,7 @@ const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSignin}>
+    <form onSubmit={handleLogin} className="flex flex-col  rounded-md w-full">
       <input
         type="email"
         value={email}
@@ -44,6 +46,7 @@ const SignInForm = () => {
         id="email"
         placeholder="email"
         required
+        className={inputStyles}
       />
       <input
         type="password"
@@ -53,12 +56,18 @@ const SignInForm = () => {
         id="password"
         placeholder="password"
         required
+        className={inputStyles}
       />
 
-      <button type="submit">Signin</button>
+      <button
+        type="submit"
+        className="w-1/2 self-center bg-gradient-to-r from-blue to-purple-400 rounded-xl px-8 py-2 my-5"
+      >
+        Signin
+      </button>
       {errorMessage && <p>{errorMessage}</p>}
     </form>
   );
 };
 
-export default SignInForm;
+export default LoginForm;
