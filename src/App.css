@@ -1,0 +1,9 @@
+.input-group {
+  top: 180px;
+  position: absolute;
+  width: 280px;
+  transition: 0.5s;
+}
+.auth-shadow {
+  box-shadow: 5px 5px 5px 5px #4150b5;
+}
